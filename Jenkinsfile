@@ -13,6 +13,12 @@ pipeline {
             }
         }
 
+        stage('Docker Logout') {
+            steps {
+                sh 'docker logout || true'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -33,8 +39,8 @@ pipeline {
 
         stage('Run Container') {
             steps {
+                sh 'docker rm -f app-container || true'
                 script {
-                    sh "docker rm -f app-container || true"
                     docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").run("--name app-container -p 5000:5000")
                 }
             }
