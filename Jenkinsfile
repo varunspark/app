@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        IMAGE_NAME = 'varunspark/app'
+    }
 
     stages {
         stage('Checkout') {
