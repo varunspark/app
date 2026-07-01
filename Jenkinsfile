@@ -11,7 +11,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("python-jenkins-app")
+                    docker.build("app")
                 }
             }
         }
@@ -19,7 +19,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    docker.image("python-jenkins-app").run("-p 5000:5000")
+                    docker.image("app").run("-p 5000:5000")
                 }
             }
         }
